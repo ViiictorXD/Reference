@@ -47,7 +47,6 @@ public class FastCache<K, V> implements Cache<K, V> {
             CacheContext<K, V> cacheContext = reference.get();
             if (cacheContext != null
                     && cacheContext.getKey() != null
-                    && cacheContext.getValue() != null
                     && cacheContext.getKey().equals(key)) {
                 SoftReference<CacheContext<K, Long>> timeReference = referencesTime[hashOf(key)];
                 if (Objects.requireNonNull(timeReference.get()).getValue()
