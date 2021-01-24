@@ -9,16 +9,16 @@
 
 ```xml
 <dependency>
-		<groupId>com.github.viiictorxd</groupId>
-		<artifactId>reference</artifactId>
-		<version>-SNAPSHOT</version>
+	<groupId>com.github.viiictorxd</groupId>
+	<artifactId>reference</artifactId>
+	<version>VERSION</version>
 </dependency>
 ```
 
 ```xml
 <repository>
-		<id>jitpack.io</id>
-		<url>https://jitpack.io</url>
+	<id>jitpack.io</id>
+	<url>https://jitpack.io</url>
 </repository>
 ```
 
@@ -30,11 +30,11 @@ Basic examples of use and existing methods with their functions.
 ```java
 Cache<String, Integer> cache = new CacheBuilder<String, Integer>()
     .maximumSize(1000)
-    .expireAfterWrite(2, TimeUnit.SECONDS)
+    .expireAfter(2, TimeUnit.SECONDS)
     .applyLoader(new CacheLoader<String, Integer>() {
         @Override
         public Integer load(String key) {
-            return 0;
+            return getValueFromDatabase();
         }
     })
     .build();
