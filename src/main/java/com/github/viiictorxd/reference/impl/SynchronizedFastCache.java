@@ -1,7 +1,7 @@
 package com.github.viiictorxd.reference.impl;
 
 import com.github.viiictorxd.reference.CacheContext;
-import com.github.viiictorxd.reference.CacheLoader;
+import com.github.viiictorxd.reference.provider.CacheLoader;
 
 import java.lang.ref.SoftReference;
 

@@ -2,7 +2,8 @@ package com.github.viiictorxd.reference.impl;
 
 import com.github.viiictorxd.reference.Cache;
 import com.github.viiictorxd.reference.CacheContext;
-import com.github.viiictorxd.reference.CacheLoader;
+import com.github.viiictorxd.reference.provider.CacheDefault;
+import com.github.viiictorxd.reference.provider.CacheLoader;
 
 import java.lang.ref.SoftReference;
 import java.util.*;
@@ -15,6 +16,7 @@ public class FastCache<K, V> implements Cache<K, V> {
     private SoftReference<CacheContext<K, Long>>[] referencesTime;
 
     private CacheLoader<K, V> cacheLoader;
+    private CacheDefault<K, V> cacheDefault;
 
     public FastCache(int maximumSize) {
         this(maximumSize, 0L);
@@ -29,11 +31,16 @@ public class FastCache<K, V> implements Cache<K, V> {
     }
 
     public FastCache(int maximumSize, long expireAfter, CacheLoader<K, V> cacheLoader) {
+        this(maximumSize, expireAfter, cacheLoader, null);
+    }
+
+    public FastCache(int maximumSize, long expireAfter, CacheLoader<K, V> cacheLoader, CacheDefault<K, V> cacheDefault) {
         this.maximumSize = maximumSize;
         this.references = new SoftReference[maximumSize];
         this.referencesTime = new SoftReference[maximumSize];
         this.expireAfter = expireAfter;
         this.cacheLoader = cacheLoader;
+        this.cacheDefault = cacheDefault;
     }
 
     public void setCacheLoader(CacheLoader<K, V> cacheLoader) {
@@ -62,14 +69,19 @@ public class FastCache<K, V> implements Cache<K, V> {
 
         if (cacheLoader != null) {
             V value = cacheLoader.load(key);
-            if (value == null)
-                return null;
+            if (value != null) {
+                put(key, value);
+                return value;
+            }
+        }
+
+        if (cacheDefault != null) {
+            V value = cacheDefault.load(key);
 
             put(key, value);
 
             return value;
         }
-
         return null;
     }
 
