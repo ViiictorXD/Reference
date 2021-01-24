@@ -9,17 +9,31 @@
 
 ```xml
 <dependency>
-	<groupId>com.github.viiictorxd</groupId>
-	<artifactId>reference</artifactId>
-	<version>VERSION</version>
+    <groupId>com.github.viiictorxd</groupId>
+    <artifactId>reference</artifactId>
+    <version>VERSION</version>
 </dependency>
 ```
 
 ```xml
 <repository>
-	<id>jitpack.io</id>
-	<url>https://jitpack.io</url>
+    <id>jitpack.io</id>
+    <url>https://jitpack.io</url>
 </repository>
+```
+
+<h3>Installing with Gradle</h3>
+
+```xml
+dependencies {
+    implementation 'com.github.viiictorxd:reference:1.2'
+}
+```
+
+```xml
+repositories {
+    maven { url 'https://jitpack.io' }
+}
 ```
 
 <h2>Samples</h2>
