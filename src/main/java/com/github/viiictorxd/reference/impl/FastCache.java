@@ -90,6 +90,7 @@ public class FastCache<K, V> implements Cache<K, V> {
 
             CacheContext<K, V> context = reference
                     .get();
+
             if (context == null)
                 continue;
 
@@ -137,9 +138,6 @@ public class FastCache<K, V> implements Cache<K, V> {
     }
 
     private int hashOf(Object object) {
-        long hash = (long) object.hashCode() + Integer.MAX_VALUE;
-        hash = hash >> 16 ^ hash;
-
-        return ((int) hash & 0xffff) % maximumSize;
+        return object.hashCode() & 0xFFFFFFF % maximumSize;
     }
 }
