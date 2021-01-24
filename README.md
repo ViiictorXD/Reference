@@ -24,13 +24,13 @@
 
 <h3>Installing with Gradle</h3>
 
-```xml
+```gradle
 dependencies {
     implementation 'com.github.viiictorxd:reference:1.2'
 }
 ```
 
-```xml
+```gradle
 repositories {
     maven { url 'https://jitpack.io' }
 }
